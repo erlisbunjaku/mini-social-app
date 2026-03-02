@@ -1,7 +1,8 @@
 import './App.css'
 import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import { useAuth } from './context/AuthContext.jsx'
-import HomePage from './pages/HomePage.jsx'
+import PostFeedPage from './pages/PostFeedPage.jsx'
+import CreatePostPage from './pages/CreatePostPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import SignUpPage from './pages/SignUpPage.jsx'
 
@@ -23,7 +24,15 @@ function App() {
                 isActive ? 'nav-link nav-link-active' : 'nav-link'
               }
             >
-              Home
+              Feed
+            </NavLink>
+            <NavLink
+              to="/create"
+              className={({ isActive }) =>
+                isActive ? 'nav-link nav-link-active' : 'nav-link'
+              }
+            >
+              Create Post
             </NavLink>
             {!user && (
               <>
@@ -62,7 +71,8 @@ function App() {
 
       <main className="app-main">
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<PostFeedPage />} />
+          <Route path="/create" element={<CreatePostPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
         </Routes>
