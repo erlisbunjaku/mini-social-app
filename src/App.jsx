@@ -1,34 +1,73 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Link, NavLink, Route, Routes } from 'react-router-dom'
+import { useAuth } from './context/AuthContext.jsx'
+import HomePage from './pages/HomePage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import SignUpPage from './pages/SignUpPage.jsx'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { user, logout } = useAuth()
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app-root">
+      <header className="app-header">
+        <div className="brand-area">
+          <Link to="/" className="brand-link">
+            <h1>Mini Social App</h1>
+          </Link>
+          <nav className="main-nav">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) =>
+                isActive ? 'nav-link nav-link-active' : 'nav-link'
+              }
+            >
+              Home
+            </NavLink>
+            {!user && (
+              <>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link nav-link-active' : 'nav-link'
+                  }
+                >
+                  Login
+                </NavLink>
+                <NavLink
+                  to="/signup"
+                  className={({ isActive }) =>
+                    isActive ? 'nav-link nav-link-active' : 'nav-link'
+                  }
+                >
+                  Sign Up
+                </NavLink>
+              </>
+            )}
+          </nav>
+        </div>
+
+        <div className="user-area">
+          {user ? (
+            <div className="user-info">
+              <span>Welcome, {user.name}</span>
+              <button onClick={logout}>Logout</button>
+            </div>
+          ) : (
+            <span className="info-text">Not logged in</span>
+          )}
+        </div>
+      </header>
+
+      <main className="app-main">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+        </Routes>
+      </main>
+    </div>
   )
 }
 
