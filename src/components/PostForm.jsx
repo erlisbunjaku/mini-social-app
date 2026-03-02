@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
 
-// Replace this with your actual MockAPI base URL
+// MockAPI base URL
 const API_BASE = 'https://69a5de9d885dcb6bd6a985e4.mockapi.io/api/v1'
 const POSTS_API = `${API_BASE}/posts`
 

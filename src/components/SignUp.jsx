@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// Replace this with your actual MockAPI base URL
+// MockAPI base URL
 const API_BASE = 'https://69a5de9d885dcb6bd6a985e4.mockapi.io/api/v1'
 const USERS_API = `${API_BASE}/users`
 
