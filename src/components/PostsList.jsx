@@ -1,9 +1,25 @@
 import { useEffect, useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
+import Avatar from './Avatar.jsx'
 
 // MockAPI base URL
 const API_BASE = 'https://69a5de9d885dcb6bd6a985e4.mockapi.io/api/v1'
 const POSTS_API = `${API_BASE}/posts`
+
+function timeAgo(dateStr) {
+  const d = new Date(dateStr)
+  const now = new Date()
+  const sec = Math.floor((now - d) / 1000)
+  if (sec < 60) return 'Just now'
+  const min = Math.floor(sec / 60)
+  if (min < 60) return `${min}m ago`
+  const hr = Math.floor(min / 60)
+  if (hr < 24) return `${hr}h ago`
+  const day = Math.floor(hr / 24)
+  if (day === 1) return 'Yesterday'
+  if (day < 7) return `${day}d ago`
+  return d.toLocaleDateString()
+}
 
 function sortByNewest(list) {
   return [...list].sort((a, b) => {
@@ -140,24 +156,35 @@ function PostCard({ post, canEdit, onDelete, onUpdateContent, onAddComment }) {
     setCommentLoading(false)
   }
 
-  const createdAt = post.createdAt ? new Date(post.createdAt).toLocaleString() : ''
+  const authorName = post.userName || 'Unknown user'
+  const timeLabel = post.createdAt ? timeAgo(post.createdAt) : ''
+  const fullTime = post.createdAt ? new Date(post.createdAt).toLocaleString() : ''
   const comments = Array.isArray(post.comments) ? post.comments : []
 
   return (
-    <article className="card post-item">
-      <header className="post-header">
-        <div>
-          <div className="post-author">{post.userName || 'Unknown user'}</div>
-          {createdAt && <div className="post-meta">{createdAt}</div>}
+    <article className="post-card">
+      <header className="post-card-header">
+        <Avatar name={authorName} size={44} />
+        <div className="post-card-meta">
+          <span className="post-card-author">{authorName}</span>
+          {timeLabel && (
+            <time className="post-card-time" title={fullTime}>
+              {timeLabel}
+            </time>
+          )}
         </div>
         {canEdit && (
-          <div className="post-actions">
-            <button type="button" onClick={() => setIsEditing((v) => !v)}>
+          <div className="post-card-actions">
+            <button
+              type="button"
+              className="post-action-btn"
+              onClick={() => setIsEditing((v) => !v)}
+            >
               {isEditing ? 'Cancel' : 'Edit'}
             </button>
             <button
               type="button"
-              className="danger-btn"
+              className="post-action-btn danger-btn"
               onClick={() => onDelete(post.id)}
             >
               Delete
@@ -166,42 +193,48 @@ function PostCard({ post, canEdit, onDelete, onUpdateContent, onAddComment }) {
         )}
       </header>
 
-      <div className="post-body">
+      <div className="post-card-body">
         {isEditing ? (
           <>
             <textarea
+              className="post-card-textarea"
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               rows={3}
+              placeholder="What's on your mind?"
             />
-            <div className="post-edit-actions">
-              <button type="button" onClick={handleSave}>
-                Save
-              </button>
-            </div>
+            <button type="button" onClick={handleSave} className="post-save-btn">
+              Save
+            </button>
           </>
         ) : (
-          <p className="post-content">{post.content}</p>
+          <p className="post-card-content">{post.content}</p>
         )}
       </div>
 
-      <section className="comments-section">
-        <h4>Comments</h4>
-        {comments.length === 0 ? (
-          <p className="info-text">No comments yet.</p>
-        ) : (
+      <div className="post-card-footer">
+        <span className="post-card-comment-count">
+          {comments.length} {comments.length === 1 ? 'comment' : 'comments'}
+        </span>
+      </div>
+
+      <section className="post-card-comments">
+        {comments.length > 0 && (
           <ul className="comments-list">
             {comments.map((c) => (
               <li key={c.id} className="comment-item">
-                <div className="comment-header">
-                  <span className="comment-author">{c.userName || 'User'}</span>
-                  {c.createdAt && (
-                    <span className="comment-meta">
-                      {new Date(c.createdAt).toLocaleString()}
-                    </span>
-                  )}
+                <Avatar name={c.userName} size={32} className="comment-avatar" />
+                <div className="comment-bubble">
+                  <div className="comment-bubble-header">
+                    <span className="comment-author">{c.userName || 'User'}</span>
+                    {c.createdAt && (
+                      <span className="comment-meta" title={new Date(c.createdAt).toLocaleString()}>
+                        {timeAgo(c.createdAt)}
+                      </span>
+                    )}
+                  </div>
+                  <p className="comment-text">{c.text}</p>
                 </div>
-                <p className="comment-text">{c.text}</p>
               </li>
             ))}
           </ul>
@@ -209,18 +242,20 @@ function PostCard({ post, canEdit, onDelete, onUpdateContent, onAddComment }) {
 
         {isLoggedIn ? (
           <form className="comment-form" onSubmit={handleSubmitComment}>
+            <Avatar name="You" size={32} className="comment-form-avatar" />
             <input
               type="text"
               placeholder="Write a comment..."
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+              className="comment-form-input"
             />
-            <button type="submit" disabled={commentLoading}>
-              {commentLoading ? 'Sending...' : 'Comment'}
+            <button type="submit" disabled={commentLoading} className="comment-form-btn">
+              {commentLoading ? 'Sending...' : 'Reply'}
             </button>
           </form>
         ) : (
-          <p className="info-text">Log in to comment.</p>
+          <p className="comment-login-hint">Log in to comment.</p>
         )}
       </section>
     </article>
