@@ -47,30 +47,41 @@ export default function Login() {
   }
 
   return (
-    <form className="card auth-card" onSubmit={handleSubmit}>
-      <h2>Login</h2>
+    <form className="card auth-card auth-card-wide" onSubmit={handleSubmit}>
+      <h2>Log in</h2>
       {error && <p className="error-text">{error}</p>}
 
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
+      <div className="auth-grid">
+        <div className="auth-field">
+          <input
+            id="login-email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <button type="submit" disabled={loading}>
-        {loading ? 'Logging in...' : 'Login'}
-      </button>
+        <div className="auth-field">
+          <input
+            id="login-password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="auth-actions">
+        <button type="submit" disabled={loading}>
+          {loading ? 'Logging in…' : 'Log in'}
+        </button>
+      </div>
     </form>
   )
 }
