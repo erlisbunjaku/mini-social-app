@@ -18,6 +18,9 @@ export default function PostForm({ onCreated }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    const trimmed = content.trim()
+    if (!trimmed) return
+
     setError('')
     setLoading(true)
 
@@ -26,7 +29,7 @@ export default function PostForm({ onCreated }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          content,
+          content: trimmed,
           userId: user.id,
           userName: user.name,
           createdAt: new Date().toISOString(),
