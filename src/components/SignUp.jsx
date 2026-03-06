@@ -50,38 +50,54 @@ export default function SignUp() {
   }
 
   return (
-    <form className="card auth-card" onSubmit={handleSubmit}>
-      <h2>Sign Up</h2>
+    <form className="card auth-card auth-card-wide" onSubmit={handleSubmit}>
+      <h2>Sign up</h2>
+
       {error && <p className="error-text">{error}</p>}
       {success && <p className="success-text">{success}</p>}
 
-      <input
-        name="name"
-        placeholder="Name"
-        value={form.name}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={form.email}
-        onChange={handleChange}
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        value={form.password}
-        onChange={handleChange}
-        required
-      />
+      <div className="auth-grid">
+        <div className="auth-field">
+          <input
+            id="name"
+            name="name"
+            placeholder="Name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <button type="submit" disabled={loading}>
-        {loading ? 'Creating...' : 'Sign Up'}
-      </button>
+        <div className="auth-field">
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="auth-field">
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+        </div>
+      </div>
+
+      <div className="auth-actions">
+        <button type="submit" disabled={loading}>
+          {loading ? 'Creating…' : 'Sign Up'}
+        </button>
+      </div>
     </form>
   )
 }

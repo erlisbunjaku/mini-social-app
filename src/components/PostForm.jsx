@@ -56,7 +56,7 @@ export default function PostForm({ onCreated }) {
         <Avatar name={user.name} size={44} />
         <div className="post-compose-meta">
           <span className="post-compose-name">{user.name}</span>
-          <span className="post-compose-hint">Share something…</span>
+          <span className="post-compose-hint">Share something with everyone…</span>
         </div>
       </div>
 
