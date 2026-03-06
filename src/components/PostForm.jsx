@@ -74,6 +74,7 @@ export default function PostForm({ onCreated }) {
       </div>
 
       <div className="post-compose-footer">
+        <span className="post-compose-info">Your post is visible to all users.</span>
         <button type="submit" disabled={loading}>
           {loading ? 'Posting…' : 'Post'}
         </button>
