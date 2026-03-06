@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
 
 // MockAPI base URL
@@ -7,6 +8,7 @@ const USERS_API = `${API_BASE}/users`
 
 export default function Login() {
   const { login } = useAuth()
+  const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
@@ -38,6 +40,8 @@ export default function Login() {
       } else {
         const foundUser = users[0]
         login(foundUser)
+        setForm({ email: '', password: '' })
+        navigate('/', { replace: true })
       }
     } catch (err) {
       setError(err.message || 'Login failed')
