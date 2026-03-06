@@ -130,6 +130,53 @@ body {
   font-size: 1.1rem;
 }
 
+.auth-card-wide {
+  width: 100%;
+  max-width: 480px;
+}
+
+.auth-card-header {
+  margin-bottom: 0.75rem;
+}
+
+.auth-card-subtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.auth-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.auth-field label {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.auth-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.9rem;
+}
+
+.auth-hint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
 .card input,
 .card textarea {
   width: 100%;
@@ -187,6 +234,57 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+/* ----- Post compose (create form) ----- */
+.post-compose {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.post-compose-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem 0.4rem;
+}
+
+.post-compose-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-compose-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.post-compose-hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.post-compose-error {
+  margin: 0 1.25rem;
+}
+
+.post-compose-body {
+  padding: 0.35rem 1.25rem 0.25rem;
+}
+
+.post-compose-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 1.25rem 0.9rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.post-compose-info {
+  font-size: 0.8rem;
+  color: #94a3b8;
 }
 
 /* ----- Avatar ----- */
@@ -319,6 +417,57 @@ button:disabled {
   padding: 0 1.25rem 1rem;
   border-top: 1px solid rgba(148, 163, 184, 0.15);
   padding-top: 0.75rem;
+}
+
+/* ----- Post compose (create form) ----- */
+.post-compose {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.post-compose-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.9rem 1.25rem 0.4rem;
+}
+
+.post-compose-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-compose-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.post-compose-hint {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+.post-compose-error {
+  margin: 0 1.25rem;
+}
+
+.post-compose-body {
+  padding: 0.35rem 1.25rem 0.25rem;
+}
+
+.post-compose-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 1.25rem 0.9rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.post-compose-info {
+  font-size: 0.8rem;
+  color: #94a3b8;
 }
 
 .comments-list {

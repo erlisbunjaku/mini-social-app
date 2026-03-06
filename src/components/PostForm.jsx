@@ -56,7 +56,7 @@ export default function PostForm({ onCreated }) {
         <Avatar name={user.name} size={44} />
         <div className="post-compose-meta">
           <span className="post-compose-name">{user.name}</span>
-          <span className="post-compose-hint">Share something…</span>
+          <span className="post-compose-hint">Share something with everyone…</span>
         </div>
       </div>
 
@@ -74,6 +74,7 @@ export default function PostForm({ onCreated }) {
       </div>
 
       <div className="post-compose-footer">
+        <span className="post-compose-info">Your post is visible to all users.</span>
         <button type="submit" disabled={loading}>
           {loading ? 'Posting…' : 'Post'}
         </button>
