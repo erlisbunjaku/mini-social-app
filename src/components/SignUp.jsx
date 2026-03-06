@@ -82,6 +82,10 @@ export default function SignUp() {
       <button type="submit" disabled={loading}>
         {loading ? 'Creating...' : 'Sign Up'}
       </button>
+
+      <h1>
+        Already have an account? <Link to="/login">Login</Link>
+      </h1>
     </form>
   )
 }
