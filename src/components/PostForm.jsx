@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
+import Avatar from './Avatar.jsx'
 
 // MockAPI base URL
 const API_BASE = 'https://69a5de9d885dcb6bd6a985e4.mockapi.io/api/v1'
@@ -47,21 +48,34 @@ export default function PostForm({ onCreated }) {
   }
 
   return (
-    <form className="card post-card" onSubmit={handleSubmit}>
-      <h3>Create Post</h3>
-      {error && <p className="error-text">{error}</p>}
+    <form className="post-card post-compose" onSubmit={handleSubmit}>
+      <div className="post-compose-header">
+        <Avatar name={user.name} size={44} />
+        <div className="post-compose-meta">
+          <span className="post-compose-name">{user.name}</span>
+          <span className="post-compose-hint">Share something with everyone…</span>
+        </div>
+      </div>
 
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="What's on your mind?"
-        required
-        rows={3}
-      />
+      {error && <p className="error-text post-compose-error">{error}</p>}
 
-      <button type="submit" disabled={loading}>
-        {loading ? 'Posting...' : 'Post'}
-      </button>
+      <div className="post-compose-body">
+        <textarea
+          className="post-card-textarea"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="What's on your mind?"
+          required
+          rows={4}
+        />
+      </div>
+
+      <div className="post-compose-footer">
+        <span className="post-compose-info">Your post is visible to all users.</span>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Posting…' : 'Post'}
+        </button>
+      </div>
     </form>
   )
 }
