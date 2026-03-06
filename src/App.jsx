@@ -1,6 +1,7 @@
 import './App.css'
 import { Link, NavLink, Route, Routes } from 'react-router-dom'
 import { useAuth } from './context/AuthContext.jsx'
+import Avatar from './components/Avatar.jsx'
 import PostFeedPage from './pages/PostFeedPage.jsx'
 import CreatePostPage from './pages/CreatePostPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
@@ -59,9 +60,20 @@ function App() {
 
         <div className="user-area">
           {user ? (
-            <div className="user-info">
-              <span>Welcome, {user.name}</span>
-              <button onClick={logout}>Logout</button>
+            <div className="user-pill">
+              <div className="user-pill-main">
+                <Avatar name={user.name} size={32} />
+                <div className="user-meta">
+                  <span className="user-name">{user.name}</span>
+                  <span className="user-status">
+                    <span className="user-status-dot" />
+                    Online
+                  </span>
+                </div>
+              </div>
+              <button type="button" className="user-logout-btn" onClick={logout}>
+                Log out
+              </button>
             </div>
           ) : (
             <span className="info-text">Not logged in</span>
