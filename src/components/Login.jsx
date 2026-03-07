@@ -24,7 +24,7 @@ export default function Login() {
 
     try {
       const res = await fetch(
-        `${USERS_API}?email=${encodeURIComponent(form.email)}&password=${encodeURIComponent(
+        `${USERS_API}?email=${encodeURIComponent(form.email)}&password=${encodeURIComponent( //safe per URL.
           form.password,
         )}`,
       )
@@ -35,10 +35,10 @@ export default function Login() {
 
       const users = await res.json()
 
-      if (!Array.isArray(users) || users.length === 0) {
-        setError('Invalid email or password')
+      if (!Array.isArray(users) || users.length === 0) { //nuk u gjet asnje user me qat email dhe password.
+        setError('Invalid email or password') 
       } else {
-        const foundUser = users[0]
+        const foundUser = users[0] //merr userin me ato kredenciale
         login(foundUser)
         setForm({ email: '', password: '' })
         navigate('/', { replace: true })

@@ -42,7 +42,7 @@ export default function PostForm({ onCreated }) {
 
       const created = await res.json()
       setContent('')
-      if (onCreated) onCreated(created)
+      if (onCreated) onCreated(created) //Kontrollo nese onCreated ekziston, nese po thirre edhe dergo postin e ri (created) 
     } catch (err) {
       setError(err.message || 'Error creating post')
     } finally {
