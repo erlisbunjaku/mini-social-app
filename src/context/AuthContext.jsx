@@ -31,9 +31,9 @@ export function AuthProvider({ children }) {
     login,
     logout,
     isLoggedIn: !!user,
-  }
+  } //gjerat qe komponeti munet mi perdor
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider> //ju jep auth data gjithe komponenteve mrenda.
 }
 
 export function useAuth() {

@@ -21,10 +21,10 @@ export default function SignUp() {
     setLoading(true)
 
     try {
-      const existsRes = await fetch(`${USERS_API}?email=${encodeURIComponent(form.email)}`)
+      const existsRes = await fetch(`${USERS_API}?email=${encodeURIComponent(form.email)}`)  //safe per URL.
       const existing = await existsRes.json()
 
-      if (Array.isArray(existing) && existing.length > 0) {
+      if (Array.isArray(existing) && existing.length > 0) { //nuk u gjet asnje user me qat email dhe password.
         setError('Email already registered.')
         setLoading(false)
         return
